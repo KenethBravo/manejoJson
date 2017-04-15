@@ -7,19 +7,26 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     ProgressBar cargador;
     Button boton;
-    TextView texto;
+    ListView texto;
+    List<Post> mysPost;
+    ArrayAdapter<String> adaptador;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
         cargador = (ProgressBar) findViewById(R.id.cargador);
         boton = (Button) findViewById(R.id.boton);
-        texto = (TextView) findViewById(R.id.texto);
+        texto = (ListView) findViewById(R.id.texto);
+
     }
 
     public Boolean isOnLine(){
@@ -52,7 +60,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void cargarDatos(){
-        texto.append("JSON cargado correctamente.");
+        ArrayList<String> lista= new ArrayList<String>();;
+       if (mysPost != null){
+           for	(Post post: mysPost){
+               lista.add(post.getTitle());
+           }
+           ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1,lista);
+           texto.setAdapter(adaptador);
+       }
     }
 
     private class MyTask extends AsyncTask<String, String, String>{
@@ -81,6 +96,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+
+            try {
+                mysPost=JsonParser.parse(s);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             cargarDatos();
             cargador.setVisibility(View.GONE);
         }

@@ -26,15 +26,11 @@
             android:text="Cargar datos"
             android:onClick="onClickButton"/>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fillViewport="true">
-            <TextView
+
+            <ListView
                 android:id="@+id/texto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-        </ScrollView>
 
     </LinearLayout>
 

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TallerAsyncTask.iml" filepath="$PROJECT_DIR$/TallerAsyncTask.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manejoJson.iml" filepath="$PROJECT_DIR$/manejoJson.iml" />
     </modules>
   </component>
 </project>
